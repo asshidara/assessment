@@ -10,10 +10,13 @@
         while (element.firstChild) {
             element.removeChild(element.firstChild);
         }
+        
     }
+
 
     userNameInput.onkeydown = (event) => {
         if (event.keyCode === 13) {
+            // TODO ボタンのonclick() 処理を呼び出す
             assessmentButton.onclick();
         }
     };
@@ -50,6 +53,17 @@
         anchor.innerText = 'Tweet #あなたのいいところ';
         tweetDivided.appendChild(anchor);
 
+        /*removeAllChildren(tweetDivided);
+        const anchor = document.createElement('a');
+        const hrefValue = 'https://twitter.com/intent/tweet?button_hashtag='
+            + encodeURIComponent('あなたのいいところ')
+            + '&ref_src=twsrc%5Etfw';
+        anchor.setAttribute('href', hrefValue);
+        anchor.className = 'twitter-hashtag-button';
+        anchor.setAttribute('data-text', result);
+        anchor.innerText = 'Tweet #あなたのいいところ';
+        tweetDivided.appendChild(anchor);*/
+
         twttr.widgets.load();
     };
 
@@ -70,17 +84,26 @@
         '{userName}のいいところは気配りです。{userName}の配慮が多くの人を救っています。',
         '{userName}のいいところはその全てです。ありのままの{userName}自身がいいところなのです。',
         '{userName}のいいところは自制心です。やばいと思ったときにしっかりと衝動を抑えられる{userName}が皆から評価されています。'
-        '{userName}のいいところは優しさです。{userName}の優しい雰囲気や立ち振る舞いに多くの人が癒やされています。'
     ];
 
+    /**
+    * 名前の文字列を渡すと診断結果を返す関数
+    * @param {string} userName ユーザーの名前
+    * @return {string} 診断結果
+    */
     function assessment(userName) {
+        // 全文字のコード番号を取得してそれを足し合わせる
         let sumOfcharCode = 0;
         for (let i = 0; i < userName.length; i++) {
             sumOfcharCode = sumOfcharCode + userName.charCodeAt(i);
         }
+
+        // 文字のコード番号の合計を回答の数で割って添字の数値を求める
         const index = sumOfcharCode % answers.length;
         let result = answers[index];
         result = result.replace(/{userName}/g, userName);
+
+        // TODO {userName} をユーザーの名前に置き換える
         return result;
     }
 
