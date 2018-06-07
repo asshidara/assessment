@@ -10,9 +10,7 @@
         while (element.firstChild) {
             element.removeChild(element.firstChild);
         }
-        
     }
-
 
     userNameInput.onkeydown = (event) => {
         if (event.keyCode === 13) {
@@ -51,17 +49,6 @@
         anchor.setAttribute('data-text', result);
         anchor.innerText = 'Tweet #あなたのいいところ';
         tweetDivided.appendChild(anchor);
-
-        /*removeAllChildren(tweetDivided);
-        const anchor = document.createElement('a');
-        const hrefValue = 'https://twitter.com/intent/tweet?button_hashtag='
-            + encodeURIComponent('あなたのいいところ')
-            + '&ref_src=twsrc%5Etfw';
-        anchor.setAttribute('href', hrefValue);
-        anchor.className = 'twitter-hashtag-button';
-        anchor.setAttribute('data-text', result);
-        anchor.innerText = 'Tweet #あなたのいいところ';
-        tweetDivided.appendChild(anchor);*/
 
         twttr.widgets.load();
     };
